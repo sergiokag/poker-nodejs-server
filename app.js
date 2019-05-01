@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
 
   if ( !( greaterOrEqualThanMin && lessOrEqualThanMax ) ) {
     const error = `Invalid request: You must request between 3 to 5 cards.`;
-    res.status(400).json({
+    return res.status(400).json({
       error
     });
   }
@@ -35,7 +35,7 @@ app.use(function(req, res, next) {
 
   if ( isFalsyReq ) {
     const error = `Invalid request: There are left ${ db.length } card(s) in the deck.`;
-    res.status(400).json({
+    return res.status(400).json({
       error
     });
   }
