@@ -20,9 +20,10 @@ app.use(function(req, res, next) {
   const lessOrEqualThanMax = NUM_OF_CARDS <= MAX;
 
   if ( !( greaterOrEqualThanMin && lessOrEqualThanMax ) ) {
-    const error = new Error('Invalid request: You must request between 3 to 5 cards');
-    error.status = 400;
-    return next(error);
+    const error = `Invalid request: You must request between 3 to 5 cards.`;
+    res.status(400).json({
+      error
+    });
   }
   next();
 });
@@ -33,9 +34,10 @@ app.use(function(req, res, next) {
   const isFalsyReq = db.length < num;
 
   if ( isFalsyReq ) {
-    const error = new Error(`Invalid request: There are left ${ db.length } card(s) in the deck`);
-    error.status = 400;
-    return next(error);
+    const error = `Invalid request: There are left ${ db.length } card(s) in the deck.`;
+    res.status(400).json({
+      error
+    });
   }
   next();
 });
@@ -50,7 +52,7 @@ app.get('/api/v1/cards', (req, res) => {
   const NUM_OF_CARDS = num ? num : null;
   const cards = drawCards(NUM_OF_CARDS, db);
 
-  res.status(200).send({
+  res.status(200).json({
     success: 'true',
     message: 'cards retrieved successfully',
     cards
