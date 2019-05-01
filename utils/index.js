@@ -1,13 +1,14 @@
-// get random card from deck
-export const getRandomCards = (numOfCards, deck) => {
-  const selectedCards = [];
+// get random cards from deck
+export const drawCards = (numOfCards, deck) => {
+  let selectedCards = [];
 
-  for(let i = 0; i < numOfCards; i++) {
+  while( selectedCards.length < numOfCards ) {
     const card = deck[Math.floor(Math.random()*deck.length)];
     const _cardIndex = selectedCards.findIndex( x => x.suit === card.suit && x.rank === card.rank );
 
     if(_cardIndex === -1){
       selectedCards.push(card);
+      removeSelectedCardsFromDeck(selectedCards, deck);
     }
   }
 
