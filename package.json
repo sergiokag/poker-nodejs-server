@@ -1,10 +1,12 @@
 {
-  "name": "y",
+  "name": "poker-nodejs-app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node_modules/.bin/nodemon app.js --exec babel-node --",
+    "start": "babel-node app.js",
+    "serve": "node_modules/.bin/nodemon app.js --exec babel-node --",
+    "heroku-postbuild": "ng build --prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
