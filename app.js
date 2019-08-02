@@ -1,66 +1,54 @@
-import express from 'express';
-import db from './db/db';
+import koa from 'koa';
+import http from 'http';
 
-import { drawCards } from './utils';
+import indexRoutes from './routes/index';
 
-// Set up the express app
-const app = express();
+// Set up the  web server
+const app = new koa();
+const server = http.createServer(app.callback());
+const PORT = 5000;
+server.listen(process.env.PORT || PORT, () => {
+  console.log(`server running on port ${PORT}`)
+});
+
 
 /**
  * Middlewares
  */
-app.use(function(req, res, next) {
+// app.use(async function(req, res, next) {
 
-  const MIN = 3;
-  const MAX = 5;
-  const num = +req.param('num');
-  const NUM_OF_CARDS = num ? num : null;
+//   const MIN = 3;
+//   const MAX = 5;
+//   const num = +req.param('num');
+//   const NUM_OF_CARDS = num ? num : null;
 
-  const greaterOrEqualThanMin = NUM_OF_CARDS >= MIN;
-  const lessOrEqualThanMax = NUM_OF_CARDS <= MAX;
+//   const greaterOrEqualThanMin = NUM_OF_CARDS >= MIN;
+//   const lessOrEqualThanMax = NUM_OF_CARDS <= MAX;
 
-  if ( !( greaterOrEqualThanMin && lessOrEqualThanMax ) ) {
-    const error = `Invalid request: You must request between 3 to 5 cards.`;
-    return res.status(400).json({
-      error
-    });
-  }
-  next();
-});
+//   if ( !( greaterOrEqualThanMin && lessOrEqualThanMax ) ) {
+//     const error = `Invalid request: You must request between 3 to 5 cards.`;
+//     return res.status(400).json({
+//       error
+//     });
+//   }
+//   next();
+// });
 
-app.use(function(req, res, next) {
+// app.use(async function(req, res, next) {
 
-  const num = +req.param('num');
-  const isFalsyReq = db.length < num;
+//   const num = +req.param('num');
+//   const isFalsyReq = db.length < num;
 
-  if ( isFalsyReq ) {
-    const error = `Invalid request: There are left ${ db.length } card(s) in the deck.`;
-    return res.status(400).json({
-      error
-    });
-  }
-  next();
-});
+//   if ( isFalsyReq ) {
+//     const error = `Invalid request: There are left ${ db.length } card(s) in the deck.`;
+//     return res.status(400).json({
+//       error
+//     });
+//   }
+//   next();
+// });
 
 /**
- * get cards by setting the num parameter
- * /api/v1/cards?num={NUMBER_OF_CARDS}
+ * Routes::
  */
-app.get('/api/v1/cards', (req, res) => {
-
-  const num = +req.param('num');
-  const NUM_OF_CARDS = num ? num : null;
-  const cards = drawCards(NUM_OF_CARDS, db);
-
-  res.status(200).json({
-    success: 'true',
-    message: 'cards retrieved successfully',
-    cards
-  });
-});
-
-const PORT = 5000;
-
-app.listen(process.env.PORT || PORT, () => {
-  console.log(`server running on port ${PORT}`)
-});
+app.use(indexRoutes.routes());
