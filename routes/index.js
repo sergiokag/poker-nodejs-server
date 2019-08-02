@@ -13,7 +13,9 @@ const router = new Router();
 
 router.get('/api/v1/cards/:num', async (ctx) => {
 
+
     const num = +ctx.params.num;
+    console.log(JSON.stringify(ctx.params))
     const NUM_OF_CARDS = num ? num : null;
     const cards = drawCards(NUM_OF_CARDS, db);
 
