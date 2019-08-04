@@ -17,10 +17,12 @@ router.get('/api/v1/cards/:num', async (ctx) => {
     const NUM_OF_CARDS = num ? num : null;
     const cards = drawCards(NUM_OF_CARDS, db);
 
+    ctx.status = 200; // default is 404. Needs investigation
+
     ctx.body = {
-      status: 'success',
+      cards,
       message: `${ ctx.params.num } requested card(s)`,
-      cards
+      status: ctx.status,
     };
 });
 
