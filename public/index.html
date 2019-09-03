@@ -15,14 +15,19 @@
   </head>
   <body>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="m" autocomplete="off" /><button id="#btn">Send</button>
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-        var socket = io('http://localhost:5000');
+        var socket = io('http://localhost:55444');
         console.log( { socket: socket } )
+
+        $('#btn').click( function() {
+          socket.emit('button pressed', $('#m').val());
+          return false;
+        })
     </script>
   </body>
 </html>

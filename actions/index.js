@@ -1,5 +1,6 @@
-// actions
-export const NEW_CONNECTION_ACTION = 'NEW_CONNECTION';
+// Actions
+export const PLAYER_CONNECTED = 'PLAYER_CONNECTED';
+export const BTN_PRESSED = 'BTN_PRESSED';
 
-// action creators
-export const newConnectionAction = () => ({ type: NEW_CONNECTION_ACTION, payload: 1 });
+// Action Creators
+export const newConnectionAction = () => ({ type: PLAYER_CONNECTED, payload: { id: '123', isPlaying: false } });

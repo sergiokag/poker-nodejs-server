@@ -1,8 +1,11 @@
-import { tap, map } from 'rxjs/operators';
-import ofType from 'redux-observable';
+// Core
+import { combineEpics } from 'redux-observable';
 
-export const clientRequestEpic = (action$, state$) => action$.pipe(
-  ofType(CLIENT_REQUEST),
-  tap( () => console.log( action$, state$) ),
-  map(() => clientRequest())
+// Epics
+import { cardsRequestEpic } from './cardsRequestEpic';
+
+const rootEpic = combineEpics(
+  cardsRequestEpic,
 );
+
+export default rootEpic;

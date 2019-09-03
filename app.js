@@ -11,12 +11,12 @@ import SocketIO from 'socket.io';
 // store
 import store from './store/store';
 
-// actions creators
+// Actions creators
 import { newConnectionAction } from './actions/index';
 
 
 // Set up the web server
-const PORT = 5000;
+const PORT = 55444;
 const app = new koa();
 const server = http.createServer(app.callback());
 server.listen(process.env.PORT || PORT, () => {
@@ -26,9 +26,18 @@ server.listen(process.env.PORT || PORT, () => {
 // The HTTP server that we're going to bind to
 const io = SocketIO(server);
 
-io.on('connect', (socket) => {
+io.on('connection', (socket) => {
+
+  // WebSocket Connection
+
   store.dispatch( newConnectionAction() );
-  console.log('a user connected!!!', typeof socket, { socket, store: store.getState() });
+  console.log('a user connected!!!', typeof socket, { store: JSON.stringify(store.getState(),null) }); // tmp
+
+  socket.on('button pressed', function(msg){
+    store.dispatch( { type: 'BTN_PRESSED' } );
+    console.log('message: ' + msg);
+  });
+
 });
 
 /**
