@@ -33,7 +33,11 @@ io.on('connection', (socket) => {
   store.dispatch( newConnectionAction() );
   console.log('a user connected!!!', typeof socket, { store: JSON.stringify(store.getState(),null) }); // tmp
 
-  socket.on('button pressed', function(msg){
+  socket.on('disconnect', () => {
+    console.log('a user disconnected!!!')
+  });
+
+  socket.on('button pressed', msg => {
     store.dispatch( { type: 'BTN_PRESSED' } );
     console.log('message: ' + msg);
   });
