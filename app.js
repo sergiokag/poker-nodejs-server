@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('a user disconnected!!!')
-    store.dispatch( disConnectionAction('123') );
+    store.dispatch( disConnectionAction('123') ); // TODO: must set a proper id for each player
   });
 
   socket.on('button pressed', msg => {
