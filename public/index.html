@@ -12,7 +12,7 @@
   </head>
   <body>
     <form>
-      <input id="m" autocomplete="off" /><button type="button" id="#btn">Send</button>
+      <input id="m" autocomplete="off" type="number" /><button id="#btn">Send</button>
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
@@ -24,8 +24,8 @@
       btn.addEventListener('click', function(e) {
         e.preventDefault();
 
-        console.log('button pressed', m.value);
-        //socket.emit('button pressed', m.value);
+        console.log('cards request', m.value);
+        socket.emit('cards request', m.value);
       })
     </script>
   </body>

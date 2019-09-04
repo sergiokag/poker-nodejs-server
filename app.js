@@ -41,9 +41,15 @@ io.on('connection', (socket) => {
     store.dispatch( disConnectionAction('123') ); // TODO: must set a proper id for each player
   });
 
-  socket.on('button pressed', msg => {
-    // store.dispatch( { type: 'BTN_PRESSED' } ); testing epic
-    console.log('message: ' + msg);
+
+  /**
+   *  The following is testing reasons
+   *
+   *  But it will be used later
+   */
+  socket.on('cards request', num => {
+    store.dispatch( { type: 'ON_CARDS_REQUEST', payload: num } );
+    console.log('cards: ' + num);
   });
 
 });
