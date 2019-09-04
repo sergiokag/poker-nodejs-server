@@ -12,7 +12,10 @@ import SocketIO from 'socket.io';
 import store from './store/store';
 
 // Actions creators
-import { newConnectionAction } from './actions/index';
+import {
+  newConnectionAction,
+  disConnectionAction
+} from './actions/index';
 
 
 // Set up the web server
@@ -35,10 +38,11 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('a user disconnected!!!')
+    store.dispatch( disConnectionAction('123') );
   });
 
   socket.on('button pressed', msg => {
-    store.dispatch( { type: 'BTN_PRESSED' } );
+    // store.dispatch( { type: 'BTN_PRESSED' } ); testing epic
     console.log('message: ' + msg);
   });
 
