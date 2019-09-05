@@ -1,6 +1,5 @@
 // Core
-import { of } from 'rxjs';
-import { tap, map, mergeMap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 
 // DB
@@ -10,21 +9,21 @@ import db from '../db/db';
 import { drawCards } from '../utils/';
 
 // Actions
-import { ON_CARDS_REQUEST, CARDS_REQUEST_SUCCESS } from '../actions';
+import { ON_CARDS_REQUEST, ON_RESPOND_TO_CLIENTS } from '../actions';
 
 // Epic
 export const cardsRequestEpic = (action$, state$) => action$.pipe(
     ofType(ON_CARDS_REQUEST),
     tap( () => console.log( 'BTN WAS PRESSED!!!!' ,typeof action$, typeof state$) ),
-    mergeMap(
+    map(
       action => {
 
         const num = action.payload ? +action.payload : null;
         const cards = drawCards(num, db);
 
-        return of(cards);
+        return cards;
 
     }),
-    map( (cards) => ({ type: CARDS_REQUEST_SUCCESS, payload: cards })
+    map( (cards) => ({ type: ON_RESPOND_TO_CLIENTS, payload: cards })
   )
 );

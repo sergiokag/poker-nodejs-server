@@ -26,7 +26,9 @@
 
         console.log('cards request', m.value);
         socket.emit('cards request', m.value);
-      })
+      });
+
+      socket.on('cards request', function(data) { console.log(data) })
     </script>
   </body>
 </html>

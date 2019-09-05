@@ -27,13 +27,15 @@ server.listen(process.env.PORT || PORT, () => {
 });
 
 // The HTTP server that we're going to bind to
+export let wSocket = null;
 const io = SocketIO(server);
 
 io.on('connection', (socket) => {
 
   // WebSocket Connection
+  wSocket = socket;
 
-  store.dispatch( newConnectionAction() );
+  store.dispatch( newConnectionAction(Math.random() * Date.now()) );
   console.log('a user connected!!!', typeof socket, { store: JSON.stringify(store.getState(),null) }); // tmp
 
   socket.on('disconnect', () => {
@@ -53,6 +55,7 @@ io.on('connection', (socket) => {
   });
 
 });
+
 
 /**
  * Middlewares::

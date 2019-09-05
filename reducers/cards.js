@@ -10,7 +10,7 @@ function cards(state = initialState, action) {
   switch (action.type) {
 
     case CARDS_REQUEST_SUCCESS:
-      return [ action.payload ];
+      return [ ...action.payload ];
 
     case CARDS_REQUEST_FAIL:
     default:
