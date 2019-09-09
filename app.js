@@ -34,13 +34,15 @@ io.on('connection', (socket) => {
 
   // WebSocket Connection
   wSocket = socket;
+  const _id = socket.id;
+  console.log('socket.id: ', typeof _id, JSON.stringify(_id));
 
-  store.dispatch( newConnectionAction(Math.random() * Date.now()) );
+  store.dispatch( newConnectionAction(_id) );
   console.log('a user connected!!!', typeof socket, { store: JSON.stringify(store.getState(),null) }); // tmp
 
   socket.on('disconnect', () => {
     console.log('a user disconnected!!!')
-    store.dispatch( disConnectionAction('123') ); // TODO: must set a proper id for each player
+    store.dispatch( disConnectionAction(_id) );
   });
 
 
