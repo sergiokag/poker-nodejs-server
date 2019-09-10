@@ -24,3 +24,14 @@ export const removeSelectedCardsFromDeck = (cards, deck) => {
     }
   });
 };
+
+//create array with empty objects
+export const createArrayWithEmptyObj = (length) => {
+  const _arr = [];
+
+  for(let i = 0; i < length; i++) {
+    _arr.push({});
+  }
+
+  return _arr;
+};

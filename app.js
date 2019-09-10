@@ -1,66 +1,72 @@
-import express from 'express';
-import db from './db/db';
+import http from 'http';
+import koa from 'koa';
+import bodyParser from 'koa-bodyparser';
 
-import { drawCards } from './utils';
+import indexRoutes from './routes/index';
+//import { cardsRangeMiddleWare, remaingCardsMiddleWare } from './middlewares';
 
-// Set up the express app
-const app = express();
+// socket io
+import SocketIO from 'socket.io';
 
-/**
- * Middlewares
- */
-app.use(function(req, res, next) {
+// store
+import store from './store/store';
 
-  const MIN = 3;
-  const MAX = 5;
-  const num = +req.param('num');
-  const NUM_OF_CARDS = num ? num : null;
+// Actions creators
+import {
+  newConnectionAction,
+  disConnectionAction
+} from './actions/index';
 
-  const greaterOrEqualThanMin = NUM_OF_CARDS >= MIN;
-  const lessOrEqualThanMax = NUM_OF_CARDS <= MAX;
 
-  if ( !( greaterOrEqualThanMin && lessOrEqualThanMax ) ) {
-    const error = `Invalid request: You must request between 3 to 5 cards.`;
-    return res.status(400).json({
-      error
-    });
-  }
-  next();
+// Set up the web server
+const PORT = 55444;
+const app = new koa();
+const server = http.createServer(app.callback());
+server.listen(process.env.PORT || PORT, () => {
+  console.log(`server running on port ${PORT}`);
 });
 
-app.use(function(req, res, next) {
+// The HTTP server that we're going to bind to
+export let wSocket = null;
+const io = SocketIO(server);
 
-  const num = +req.param('num');
-  const isFalsyReq = db.length < num;
+io.on('connection', (socket) => {
 
-  if ( isFalsyReq ) {
-    const error = `Invalid request: There are left ${ db.length } card(s) in the deck.`;
-    return res.status(400).json({
-      error
-    });
-  }
-  next();
-});
+  // WebSocket Connection
+  wSocket = socket;
+  const _id = socket.id;
+  console.log('socket.id: ', typeof _id, JSON.stringify(_id));
 
-/**
- * get cards by setting the num parameter
- * /api/v1/cards?num={NUMBER_OF_CARDS}
- */
-app.get('/api/v1/cards', (req, res) => {
+  store.dispatch( newConnectionAction(_id) );
+  console.log('a user connected!!!', typeof socket, { store: JSON.stringify(store.getState(),null) }); // tmp
 
-  const num = +req.param('num');
-  const NUM_OF_CARDS = num ? num : null;
-  const cards = drawCards(NUM_OF_CARDS, db);
-
-  res.status(200).json({
-    success: 'true',
-    message: 'cards retrieved successfully',
-    cards
+  socket.on('disconnect', () => {
+    console.log('a user disconnected!!!')
+    store.dispatch( disConnectionAction(_id) );
   });
+
+
+  /**
+   *  The following is testing reasons
+   *
+   *  But it will be used later
+   */
+  socket.on('cards request', num => {
+    store.dispatch( { type: 'ON_CARDS_REQUEST', payload: num } );
+    console.log('cards: ' + num);
+  });
+
 });
 
-const PORT = 5000;
 
-app.listen(process.env.PORT || PORT, () => {
-  console.log(`server running on port ${PORT}`)
-});
+/**
+ * Middlewares::
+ */
+app.use(bodyParser());
+// app.use(cardsRangeMiddleWare());
+// app.use(remaingCardsMiddleWare());
+
+/**
+ * Routes::
+ */
+app.use(indexRoutes.routes()).use(indexRoutes.allowedMethods());
