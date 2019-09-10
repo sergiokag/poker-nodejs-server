@@ -28,7 +28,8 @@
         socket.emit('cards request', m.value);
       });
 
-      socket.on('cards request', function(data) { console.log(data) })
+      socket.on('cards request', function(data) { 'Your cards: ', console.log(data) });
+      socket.on('broadcast cards request', function(data) { 'Opponent cards: ', console.log(data) });
     </script>
   </body>
 </html>

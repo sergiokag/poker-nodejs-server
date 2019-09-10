@@ -20,7 +20,7 @@ export const respondToClientsEpic = (action$, state$) => action$.pipe(
         wSocket.emit('cards request', cards);
 
         // sending to all clients except sender
-        wSocket.broadcast.emit('broadcast to other players', {
+        wSocket.broadcast.emit('broadcast cards request', {
           opponentID: wSocket.id,
           opponentCards: createArrayWithEmptyObj(cards.length),
         });
