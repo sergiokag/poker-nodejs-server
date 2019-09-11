@@ -6,7 +6,7 @@ import { ofType } from 'redux-observable';
 import { ON_RESPOND_TO_CLIENTS } from '../actions';
 
 // Web Socket
-import { wSocket } from '../app';
+import { socketsList } from '../app';
 
 // Utils
 import { createArrayWithEmptyObj } from '../utils';
@@ -15,7 +15,12 @@ import { createArrayWithEmptyObj } from '../utils';
 export const respondToClientsEpic = (action$, state$) => action$.pipe(
     ofType(ON_RESPOND_TO_CLIENTS),
     map(
-      ({ payload: cards }) => {
+      ({ payload: { cards, id } }) => {
+
+        const wSocket = socketsList.find( s => s.id === id );
+
+        console.log('RespondToClient: ', wSocket.id)
+
         // sending to the client
         wSocket.emit('cards request', cards);
 

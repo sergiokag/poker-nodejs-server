@@ -14,7 +14,8 @@ import store from './store/store';
 // Actions creators
 import {
   newConnectionAction,
-  disConnectionAction
+  disConnectionAction,
+  ON_CARDS_REQUEST
 } from './actions/index';
 
 
@@ -27,22 +28,24 @@ server.listen(process.env.PORT || PORT, () => {
 });
 
 // The HTTP server that we're going to bind to
-export let wSocket = null;
 const io = SocketIO(server);
+export const socketsList = [];
 
 io.on('connection', (socket) => {
 
   // WebSocket Connection
-  wSocket = socket;
+  socketsList.push(socket); // move to epics
+
   const _id = socket.id;
   console.log('socket.id: ', typeof _id, JSON.stringify(_id));
 
-  store.dispatch( newConnectionAction(_id) );
+  store.dispatch( newConnectionAction(socket.id) );
   console.log('a user connected!!!', typeof socket, { store: JSON.stringify(store.getState(),null) }); // tmp
 
   socket.on('disconnect', () => {
     console.log('a user disconnected!!!')
-    store.dispatch( disConnectionAction(_id) );
+    socketsList.filter( s => s.id !== socket.id ); // move to epics
+    store.dispatch( disConnectionAction(socket.id) );
   });
 
 
@@ -52,7 +55,8 @@ io.on('connection', (socket) => {
    *  But it will be used later
    */
   socket.on('cards request', num => {
-    store.dispatch( { type: 'ON_CARDS_REQUEST', payload: num } );
+    console.log('requested from: ', socket.id)
+    store.dispatch( { type: ON_CARDS_REQUEST, payload: { num, id: socket.id } });
     console.log('cards: ' + num);
   });
 

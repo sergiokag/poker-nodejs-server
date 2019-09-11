@@ -9,18 +9,18 @@ export const CARDS_REQUEST_FAIL = 'CARDS_REQUEST_FAIL';
 export const ON_RESPOND_TO_CLIENTS = 'ON_RESPOND_TO_CLIENTS';
 
 // Action Creators
-export const newConnectionAction = (id) => ({ 
+export const newConnectionAction = (id) => ({
     type: PLAYER_CONNECTED,
-    payload: { 
+    payload: {
         id, // uuid
-        isPlaying: false 
-    } 
+        isPlaying: false
+    }
 });
-export const disConnectionAction = (playerID) => ({ 
+export const disConnectionAction = (playerID) => ({
     type: PLAYER_DISCONNECTED,
-    payload: playerID 
+    payload: playerID
 });
-export const getCardsAction = num => ({ 
+export const getCardsAction = num => ({
     type: ON_CARDS_REQUEST,
-    payload: num 
+    payload: num
 });
