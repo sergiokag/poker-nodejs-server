@@ -13,9 +13,11 @@ import store from './store/store';
 
 // Actions creators
 import {
+  ON_CARDS_REQUEST,
   newConnectionAction,
   disConnectionAction,
-  ON_CARDS_REQUEST
+  addSocketAction,
+  removeSocketAction
 } from './actions/index';
 
 
@@ -29,22 +31,20 @@ server.listen(process.env.PORT || PORT, () => {
 
 // The HTTP server that we're going to bind to
 const io = SocketIO(server);
-export const socketsList = [];
 
 io.on('connection', (socket) => {
 
   // WebSocket Connection
-  socketsList.push(socket); // move to epics
 
-  const _id = socket.id;
-  console.log('socket.id: ', typeof _id, JSON.stringify(_id));
+  const _id = socket.id; //tmp
+  console.log('socket.id: ', typeof _id, JSON.stringify(_id)); //tmp
 
+  store.dispatch( addSocketAction(socket) );
   store.dispatch( newConnectionAction(socket.id) );
-  console.log('a user connected!!!', typeof socket, { store: JSON.stringify(store.getState(),null) }); // tmp
 
   socket.on('disconnect', () => {
     console.log('a user disconnected!!!')
-    socketsList.filter( s => s.id !== socket.id ); // move to epics
+    store.dispatch( removeSocketAction(socket.id) );
     store.dispatch( disConnectionAction(socket.id) );
   });
 
