@@ -13,8 +13,11 @@ import store from './store/store';
 
 // Actions creators
 import {
+  ON_CARDS_REQUEST,
   newConnectionAction,
-  disConnectionAction
+  disConnectionAction,
+  addSocketAction,
+  removeSocketAction
 } from './actions/index';
 
 
@@ -27,22 +30,22 @@ server.listen(process.env.PORT || PORT, () => {
 });
 
 // The HTTP server that we're going to bind to
-export let wSocket = null;
 const io = SocketIO(server);
 
 io.on('connection', (socket) => {
 
   // WebSocket Connection
-  wSocket = socket;
-  const _id = socket.id;
-  console.log('socket.id: ', typeof _id, JSON.stringify(_id));
 
-  store.dispatch( newConnectionAction(_id) );
-  console.log('a user connected!!!', typeof socket, { store: JSON.stringify(store.getState(),null) }); // tmp
+  const _id = socket.id; //tmp
+  console.log('socket.id: ', typeof _id, JSON.stringify(_id)); //tmp
+
+  store.dispatch( addSocketAction(socket) );
+  store.dispatch( newConnectionAction(socket.id) );
 
   socket.on('disconnect', () => {
     console.log('a user disconnected!!!')
-    store.dispatch( disConnectionAction(_id) );
+    store.dispatch( removeSocketAction(socket.id) );
+    store.dispatch( disConnectionAction(socket.id) );
   });
 
 
@@ -52,7 +55,8 @@ io.on('connection', (socket) => {
    *  But it will be used later
    */
   socket.on('cards request', num => {
-    store.dispatch( { type: 'ON_CARDS_REQUEST', payload: num } );
+    console.log('requested from: ', socket.id)
+    store.dispatch( { type: ON_CARDS_REQUEST, payload: { num, id: socket.id } });
     console.log('cards: ' + num);
   });
 

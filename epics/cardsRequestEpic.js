@@ -18,12 +18,13 @@ export const cardsRequestEpic = (action$, state$) => action$.pipe(
     map(
       action => {
 
-        const num = action.payload ? +action.payload : null;
+        const id = action.payload.id;
+        const num = action.payload ? +action.payload.num : null;
         const cards = drawCards(num, db);
 
-        return cards;
+        return { cards, id };
 
     }),
-    map( (cards) => ({ type: ON_RESPOND_TO_CLIENTS, payload: cards })
+    map( (payload) => ({ type: ON_RESPOND_TO_CLIENTS, payload })
   )
 );

@@ -1,12 +1,9 @@
 // Core
-import { map, ignoreElements } from 'rxjs/operators';
+import { map, ignoreElements, withLatestFrom } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 
 // Actions
 import { ON_RESPOND_TO_CLIENTS } from '../actions';
-
-// Web Socket
-import { wSocket } from '../app';
 
 // Utils
 import { createArrayWithEmptyObj } from '../utils';
@@ -14,8 +11,18 @@ import { createArrayWithEmptyObj } from '../utils';
 // Epic
 export const respondToClientsEpic = (action$, state$) => action$.pipe(
     ofType(ON_RESPOND_TO_CLIENTS),
+    withLatestFrom(state$),
     map(
-      ({ payload: cards }) => {
+      ([ action, state ]) => {
+
+        const { cards, id } = action.payload;
+        const { sockets } = state;
+
+        const wSocket = sockets.find( s => s.id === id );
+
+        //tmp
+        console.log('RespondToClient: ', action.payload.cards, sockets.length)
+
         // sending to the client
         wSocket.emit('cards request', cards);
 
