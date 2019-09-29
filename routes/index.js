@@ -1,18 +1,18 @@
-import fs from 'fs';
-import path from 'path';
+//import fs from 'fs';
+//import path from 'path';
 import Router from 'koa-router';
 
 import { drawCards } from '../utils/';
 import db from '../db/db';
 
 const router = new Router();
-const distFolder = path.resolve(__dirname, '../public');
+//const distFolder = path.resolve(__dirname, '../public');
 
 // tmp: For testing reasons
-router.get('/', async (ctx) => {
-  ctx.type = 'html';
-  ctx.body = fs.createReadStream(`${distFolder}/index.html`);
-})
+// router.get('/', async (ctx) => {
+//   ctx.type = 'html';
+//   ctx.body = fs.createReadStream(`${distFolder}/index.html`);
+// })
 
 /**
  * get cards by setting the num parameter

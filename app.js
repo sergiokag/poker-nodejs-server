@@ -48,6 +48,17 @@ io.on('connection', (socket) => {
     store.dispatch( disConnectionAction(socket.id) );
   });
 
+  socket.on('client-event', (action) => {
+    console.log('|--------- From Client: ----|', action);
+    // todo: action creator
+    store.dispatch({
+      ...action,
+      payload: {
+        ...action.payload,
+        id: socket.id
+      }
+    });
+  });
 
   /**
    *  The following is testing reasons

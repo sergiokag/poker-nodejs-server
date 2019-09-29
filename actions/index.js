@@ -1,3 +1,6 @@
+import { drawCards } from "../utils";
+import db from '../db/db';
+
 // Actions
 export const PLAYER_CONNECTED = 'PLAYER_CONNECTED';
 export const PLAYER_DISCONNECTED = 'PLAYER_DISCONNECTED';
@@ -10,12 +13,20 @@ export const CARDS_REQUEST_FAIL = 'CARDS_REQUEST_FAIL';
 
 export const ON_RESPOND_TO_CLIENTS = 'ON_RESPOND_TO_CLIENTS';
 
+export const SYSTEM_REQUEST_FROM_CLIENT = '[SYSTEM] REQUEST_FROM_CLIENT';
+
+export const START_GAME = 'START_GAME';
+export const GAME_STARTED = 'GAME_STARTED';
+
+
 // Action Creators
 export const newConnectionAction = id => ({
     type: PLAYER_CONNECTED,
     payload: {
-        id, // uuid
-        isPlaying: false
+        balance: 1000,
+        name: id,
+        isPlaying: false,
+        hand: drawCards(5, db).map( c => ({ ...c, flipped: true }) ) // tmp
     }
 });
 export const disConnectionAction = playerID => ({

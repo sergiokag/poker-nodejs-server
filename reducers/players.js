@@ -3,7 +3,17 @@ import {
   PLAYER_DISCONNECTED
 } from '../actions';
 
-const initialState = [];
+import db from '../db/db';
+import { drawCards } from '../utils';
+
+const initialState = [
+  {
+    balance: 1000,
+    name: 'RTMS',
+    isPlaying: false,
+    hand: drawCards(5, db).map( c => ({ ...c, flipped: false }) )
+  }
+];
 
 function players(state = initialState, action) {
 

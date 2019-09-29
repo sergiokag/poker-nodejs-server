@@ -1,211 +1,211 @@
 const DECK = [
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank": 1,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank": 2,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank": 3,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank": 4,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank": 5,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank": 6,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank": 7,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank": 8,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank": 9,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank":  10,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank":  11,
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank":  12,
 
   },
   {
-    "suit": "hearts",
+    "suit": "Hearts",
     "rank": 13,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 1,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 2,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 3,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 4,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 5,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 6,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 7,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 8,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 9,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 10,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 11,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 12,
   },
   {
-    "suit": "diamonds",
+    "suit": "Diams",
     "rank": 13,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 1,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 2,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 3,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 4,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 5,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 6,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 7,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 8,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 9,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 10,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 11,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 12,
   },
   {
-    "suit": "clubs",
+    "suit": "Clubs",
     "rank": 13,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 1,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 2,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 3,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 4,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 5,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 6,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 7,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 8,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 9,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 10,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 11,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 12,
   },
   {
-    "suit": "spades",
+    "suit": "Spades",
     "rank": 13,
   }
 ];
