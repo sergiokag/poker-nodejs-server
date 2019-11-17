@@ -2,14 +2,14 @@ import http from 'http';
 import koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 
-import indexRoutes from './routes/';
+import indexRoutes from 'routes';
 //import { cardsRangeMiddleWare, remaingCardsMiddleWare } from './middlewares';
 
 // socket io
 import SocketIO from 'socket.io';
 
 // store
-import store from './store/store';
+import store from 'store/store';
 
 // Actions creators
 import {
@@ -18,7 +18,7 @@ import {
   disConnectionAction,
   addSocketAction,
   removeSocketAction
-} from './actions/';
+} from 'actions';
 
 
 // Set up the web server
