@@ -3,7 +3,7 @@ import { map, ignoreElements, withLatestFrom, tap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 
 // DB
-import db from '../db/db';
+import db from '../../db/db';
 
 // Utils
 //import { drawCards } from '../utils/';
@@ -17,7 +17,7 @@ export const gameEpic = (action$, state$) => action$.pipe(
     tap( (action) => {  console.log('incoming', action)  } ),
     withLatestFrom(state$),
     map(
-      ([ action, state ]) => {
+      ([ action, state ]: any) => { //TODO: Change the any type
 
         const { id }  = action.payload;
         const deck = [ ...db ];

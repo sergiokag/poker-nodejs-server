@@ -3,7 +3,7 @@ import {
   SOCKET_REMOVED
 } from '../actions';
 
-const initialState = [];
+const initialState: any = []; //TODO: Change the any type
 
 function sockets(state = initialState, action) {
 
@@ -13,7 +13,7 @@ function sockets(state = initialState, action) {
       return [ ...state, action.payload ];
 
     case SOCKET_REMOVED:
-      return [ ...state ].filter( s => s.id !== action.payload );
+      return [ ...state ].filter( (s:any) => s.id !== action.payload ); //TODO: Change the any type
 
     default:
       return state;

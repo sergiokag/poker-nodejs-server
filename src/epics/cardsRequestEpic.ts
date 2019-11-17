@@ -3,7 +3,7 @@ import { tap, map } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 
 // DB
-import db from '../db/db';
+import db from '../../db/db';
 
 // Utils
 import { drawCards } from '../utils/';
@@ -16,10 +16,10 @@ export const cardsRequestEpic = (action$, state$) => action$.pipe(
     ofType(ON_CARDS_REQUEST),
     tap( () => console.log( 'BTN WAS PRESSED!!!!' ,typeof action$, typeof state$) ),
     map(
-      action => {
+      (action: any) => { // TODO: change the any type
 
         const id = action.payload.id;
-        const num = action.payload ? +action.payload.num : null;
+        const num: number = action.payload ? +action.payload.num : 1;
         const cards = drawCards(num, db);
 
         return { cards, id };

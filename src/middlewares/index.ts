@@ -1,4 +1,5 @@
-import db from '../db/db';
+import { res } from 'koa';
+import db from '../../db/db';
 
 export function cardsRangeMiddleWare() {
   return async (ctx, next) => {
@@ -6,7 +7,7 @@ export function cardsRangeMiddleWare() {
     const MIN = 3;
     const MAX = 5;
     const num = +(ctx.request.url[ctx.request.url.length - 1]); // TODO: REFACTOR
-    const NUM_OF_CARDS = num ? num : null;
+    const NUM_OF_CARDS = num ? num : 1;
 
     const greaterOrEqualThanMin = NUM_OF_CARDS >= MIN;
     const lessOrEqualThanMax = NUM_OF_CARDS <= MAX;

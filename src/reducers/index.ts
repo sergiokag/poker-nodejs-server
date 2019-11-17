@@ -6,5 +6,5 @@ import sockets from './sockets';
 export default combineReducers({
   players,
   cards,
-  sockets,
+  sockets
 });

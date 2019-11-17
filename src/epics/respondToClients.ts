@@ -13,7 +13,7 @@ export const respondToClientsEpic = (action$, state$) => action$.pipe(
     ofType(ON_RESPOND_TO_CLIENTS),
     withLatestFrom(state$),
     map(
-      ([ action, state ]) => {
+      ([ action, state ]: any) => { //TODO: Change the any type
 
         const { cards, id } = action.payload;
         const { sockets } = state;

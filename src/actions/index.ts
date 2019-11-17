@@ -1,6 +1,3 @@
-import { drawCards } from "../utils";
-import db from '../db/db';
-
 // Actions
 export const PLAYER_CONNECTED = 'PLAYER_CONNECTED';
 export const PLAYER_DISCONNECTED = 'PLAYER_DISCONNECTED';
@@ -26,7 +23,7 @@ export const newConnectionAction = id => ({
         balance: 1000,
         name: id,
         isPlaying: false,
-        hand: drawCards(5, db).map( c => ({ ...c, flipped: true }) ) // tmp
+        hand: []
     }
 });
 export const disConnectionAction = playerID => ({

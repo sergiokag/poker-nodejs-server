@@ -3,7 +3,7 @@ import {
   CARDS_REQUEST_FAIL
 } from '../actions';
 
-const initialState = [];
+const initialState: any = []; //TODO: Change the any type
 
 function cards(state = initialState, action) {
 

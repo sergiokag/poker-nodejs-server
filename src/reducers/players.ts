@@ -3,7 +3,7 @@ import {
   PLAYER_DISCONNECTED
 } from '../actions';
 
-import db from '../db/db';
+import db from '../../db/db';
 import { drawCards } from '../utils';
 
 const initialState = [
@@ -23,7 +23,7 @@ function players(state = initialState, action) {
       return [ ...state, action.payload ];
 
     case PLAYER_DISCONNECTED:
-      return [ ...state ].filter( p => p.id !== action.payload );
+      return [ ...state ].filter( (p:any) => p.id !== action.payload ); //TODO: Change the any type
 
     default:
       return state;
